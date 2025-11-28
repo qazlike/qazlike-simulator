@@ -1,81 +1,62 @@
-// QazLike Simulator v1.0 - script.js
+// QazLike Simulator v1.0 - Working Script
+// Handles initial calculation and UI updates
 
-// ----------- VARIABLES -----------
-let totalBudget = 0;
-let population = 0;
-let budgetPerCitizen = 0;
-let level1Allocated = 0;
-let level2Allocated = 0;
-let isLevel1Complete = false;
-let isLevel2Complete = false;
+document.addEventListener("DOMContentLoaded", () => {
+    const calcBtn = document.getElementById("calculateBtn");
+    const resultBox = document.getElementById("resultBox");
 
-// ----------- UI ELEMENTS -----------
-function showScreen(id) {
-  document.querySelectorAll('.screen').forEach(s => s.style.display = 'none');
-  document.getElementById(id).style.display = 'block';
+    calcBtn.addEventListener("click", () => {
+        const budget = parseFloat(document.getElementById("budget").value);
+        const population = parseFloat(document.getElementById("population").value);
+
+        // validation
+        if (isNaN(budget) || isNaN(population) || budget <= 0 || population <= 0) {
+            resultBox.innerHTML = "<p style='color:red;'>Please enter valid numbers.</p>";
+            return;
+        }
+
+        // core logic
+        const perCitizen = budget / population;
+
+        // show result
+        resultBox.innerHTML = `
+            <h3>Calculation Result:</h3>
+            <p><strong>National Budget:</strong> ${budget.toLocaleString()}</p>
+            <p><strong>Population:</strong> ${population.toLocaleString()}</p>
+            <p><strong>Budget per Citizen:</strong> ${perCitizen.toLocaleString(undefined, { maximumFractionDigits: 2 })}</p>
+
+            <hr>
+
+            <button id="nextStepBtn" class="next-btn">Proceed to Level 1 →</button>
+        `;
+
+        // now activate next step button
+        document.getElementById("nextStepBtn").addEventListener("click", () => {
+            goToLevel1();
+        });
+    });
+});
+
+
+// ======================
+// Level 1 Placeholder
+// ======================
+function goToLevel1() {
+    const app = document.getElementById("app");
+
+    app.innerHTML = `
+        <h2>Level 1 — National Security Allocation</h2>
+        <p>Here citizens allocate budget to mandatory state sectors:</p>
+
+        <ul>
+            <li>Army</li>
+            <li>Border Security</li>
+            <li>Police</li>
+            <li>Court System</li>
+            <li>Strategic Safety</li>
+            <li>Minimal State Administration</li>
+        </ul>
+
+        <p>Next: voting interface, sliders, and automatic smart-contract deductions.</p>
+    `;
 }
-
-// ----------- STEP 1: INPUT DATA -----------
-function startSimulation() {
-  totalBudget = Number(document.getElementById('inputBudget').value);
-  population = Number(document.getElementById('inputPopulation').value);
-
-  if (!totalBudget || !population || totalBudget <= 0 || population <= 0) {
-    alert('Введите корректные данные.');
-    return;
-  }
-
-  budgetPerCitizen = totalBudget / population;
-  document.getElementById('budgetPerCitizen').innerText = budgetPerCitizen.toFixed(2);
-
-  showScreen('screen2');
-}
-
-// ----------- STEP 2: LEVEL 1 (SECURITY) -----------
-function allocateLevel1(amount) {
-  if (isLevel1Complete) return;
-  level1Allocated += amount;
-
-  const required = totalBudget * 0.25; // ДЕМО: 25% бюджета
-  document.getElementById('level1Progress').innerText = `${level1Allocated.toFixed(0)} / ${required.toFixed(0)}`;
-
-  if (level1Allocated >= required) {
-    isLevel1Complete = true;
-    alert('Уровень 1 полностью профинансирован!');
-    showScreen('screen4');
-  }
-}
-
-// ----------- STEP 3: LEVEL 2 (INFRASTRUCTURE) -----------
-function allocateLevel2(amount) {
-  if (!isLevel1Complete) {
-    alert('Сначала завершите Уровень 1.');
-    return;
-  }
-
-  if (isLevel2Complete) return;
-  level2Allocated += amount;
-
-  const required = totalBudget * 0.35; // ДЕМО: 35% бюджета
-  document.getElementById('level2Progress').innerText = `${level2Allocated.toFixed(0)} / ${required.toFixed(0)}`;
-
-  if (level2Allocated >= required) {
-    isLevel2Complete = true;
-    alert('Уровень 2 завершён! Переход к личным средствам.');
-    showScreen('screen5');
-    calculatePersonalFunds();
-  }
-}
-
-// ----------- STEP 4: PERSONAL FUNDS -----------
-function calculatePersonalFunds() {
-  const level1req = totalBudget * 0.25;
-  const level2req = totalBudget * 0.35;
-  const remaining = totalBudget - level1req - level2req;
-
-  const perCitizen = remaining / population;
-  document.getElementById('personalFunds').innerText = perCitizen.toFixed(2);
-}
-
-// ----------- INIT -----------
-showScreen('screen1');
