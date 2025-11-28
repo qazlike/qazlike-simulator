@@ -1,34 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>QazLike Simulator</title>
-<link rel="stylesheet" href="style.css"></head><body>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QazLike Simulator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
 <h1>QazLike Simulator</h1>
+
 <div class="container">
-  <label>National Budget:<input id="budget" type="number"></label>
-  <label>Population:<input id="population" type="number"></label>
-  <button id="calculateBtn">Calculate</button>
-  <div id="result" style="display:block;margin-top:16px"></div>
-<!-- LEVEL 1 SECURITY -->
-<h2>Level 1 — National Security (Mandatory)</h2>
 
-<div id="level1" style="display:none; margin-top:20px; padding:15px; border:1px solid #888; border-radius:8px; background:#eef2f7;">
+    <!-- INITIAL INPUT -->
+    <label>National Budget:
+        <input id="budget" type="number" placeholder="Enter total budget">
+    </label>
 
-    <p>Enter required spending for each sector:</p>
+    <label>Population:
+        <input id="population" type="number" placeholder="Enter population">
+    </label>
 
-    <label>Army: <input type="number" id="army" value="0"></label><br>
-    <label>Border Security: <input type="number" id="border" value="0"></label><br>
-    <label>Police: <input type="number" id="police" value="0"></label><br>
-    <label>Court System: <input type="number" id="courts" value="0"></label><br>
-    <label>Strategic Safety: <input type="number" id="safety" value="0"></label><br>
-    <label>Minimal Governance: <input type="number" id="gov" value="0"></label><br><br>
+    <button id="calculateBtn">Calculate</button>
 
-    <button id="confirm-level1">Confirm Level 1</button>
+    <div id="result" style="margin-top:16px; display:block;"></div>
 
-    <p id="level1-status" style="font-weight:bold; margin-top:10px;"></p>
+
+    <!-- LEVEL 1 SECURITY (HIDDEN BY DEFAULT) -->
+    <div id="level1" style="display:none; margin-top:20px; padding:15px; border:1px solid #888; border-radius:8px; background:#eef2f7;">
+        <h2>Level 1 — National Security (Mandatory)</h2>
+
+        <p>Enter required spending for each sector:</p>
+
+        <label>Army:
+            <input type="number" id="army" value="0">
+        </label><br>
+
+        <label>Border Security:
+            <input type="number" id="border" value="0">
+        </label><br>
+
+        <label>Police:
+            <input type="number" id="police" value="0">
+        </label><br>
+
+        <label>Court System:
+            <input type="number" id="courts" value="0">
+        </label><br>
+
+        <label>Strategic Safety:
+            <input type="number" id="safety" value="0">
+        </label><br>
+
+        <label>Minimal Governance:
+            <input type="number" id="gov" value="0">
+        </label><br><br>
+
+        <button id="confirm-level1">Confirm Level 1</button>
+
+        <p id="level1-status" style="font-weight:bold; margin-top:10px;"></p>
+    </div>
+
 </div>
 
+<!-- JS -->
 <script src="script.js"></script>
+
 </body>
 </html>
-
-
