@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QazLike Simulator 1.0</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+    <h1>QazLike Simulator 1.0</h1>
+
+    <section id="input-section">
+      <h2>Initial Data</h2>
+      <label>National Budget: <input id="budget" type="number" placeholder="Enter budget" /></label>
+      <label>Population: <input id="population" type="number" placeholder="Enter population" /></label>
+      <button id="calculate-btn">Calculate</button>
+    </section>
+
+    <section id="results" style="display:none;">
+      <h2>Results</h2>
+      <p id="per-capita"></p>
+      <button id="go-levels">Proceed to Levels</button>
+    </section>
+
+    <section id="levels" style="display:none;">
+      <h2>Budget Allocation Levels</h2>
+
+      <div class="level" id="level1">
+        <h3>Level 1 — National Security</h3>
+        <p>Army, Police, Courts, Borders, Strategic safety</p>
+        <label>Required Amount: <input id="lvl1req" type="number" /></label>
+        <button onclick="allocateLevel(1)">Allocate Level 1</button>
+        <p id="lvl1status"></p>
+      </div>
+
+      <div class="level" id="level2" style="display:none;">
+        <h3>Level 2 — Infrastructure</h3>
+        <p>Roads, Bridges, Transport, Communications, Energy, Tech Innovation</p>
+        <label>Required Amount: <input id="lvl2req" type="number" /></label>
+        <button onclick="allocateLevel(2)">Allocate Level 2</button>
+        <p id="lvl2status"></p>
+      </div>
+
+      <div class="level" id="level3" style="display:none;">
+        <h3>Level 3 — Personal Funds</h3>
+        <p id="lvl3amount"></p>
+      </div>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
