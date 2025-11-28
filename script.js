@@ -1,62 +1,57 @@
-// QazLike Simulator v1.0 - Working Script
-// Handles initial calculation and UI updates
+body {
+    font-family: Arial, sans-serif;
+    background: #f3f6fa;
+    margin: 0;
+    padding: 0;
+}
 
-document.addEventListener("DOMContentLoaded", () => {
-    const calcBtn = document.getElementById("calculateBtn");
-    const resultBox = document.getElementById("resultBox");
+h1 {
+    text-align: center;
+    margin-top: 30px;
+}
 
-    calcBtn.addEventListener("click", () => {
-        const budget = parseFloat(document.getElementById("budget").value);
-        const population = parseFloat(document.getElementById("population").value);
+.container {
+    width: 400px;
+    margin: 30px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
 
-        // validation
-        if (isNaN(budget) || isNaN(population) || budget <= 0 || population <= 0) {
-            resultBox.innerHTML = "<p style='color:red;'>Please enter valid numbers.</p>";
-            return;
-        }
+label {
+    display: block;
+    margin-top: 15px;
+}
 
-        // core logic
-        const perCitizen = budget / population;
+input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
 
-        // show result
-        resultBox.innerHTML = `
-            <h3>Calculation Result:</h3>
-            <p><strong>National Budget:</strong> ${budget.toLocaleString()}</p>
-            <p><strong>Population:</strong> ${population.toLocaleString()}</p>
-            <p><strong>Budget per Citizen:</strong> ${perCitizen.toLocaleString(undefined, { maximumFractionDigits: 2 })}</p>
+button {
+    width: 100%;
+    padding: 12px;
+    background: #2b6ffe;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    margin-top: 20px;
+    cursor: pointer;
+    font-size: 16px;
+}
 
-            <hr>
+button:hover {
+    background: #1f54c7;
+}
 
-            <button id="nextStepBtn" class="next-btn">Proceed to Level 1 →</button>
-        `;
-
-        // now activate next step button
-        document.getElementById("nextStepBtn").addEventListener("click", () => {
-            goToLevel1();
-        });
-    });
-});
-
-
-// ======================
-// Level 1 Placeholder
-// ======================
-function goToLevel1() {
-    const app = document.getElementById("app");
-
-    app.innerHTML = `
-        <h2>Level 1 — National Security Allocation</h2>
-        <p>Here citizens allocate budget to mandatory state sectors:</p>
-
-        <ul>
-            <li>Army</li>
-            <li>Border Security</li>
-            <li>Police</li>
-            <li>Court System</li>
-            <li>Strategic Safety</li>
-            <li>Minimal State Administration</li>
-        </ul>
-
-        <p>Next: voting interface, sliders, and automatic smart-contract deductions.</p>
-    `;
+#result {
+    margin-top: 25px;
+    padding: 15px;
+    background: #eef3ff;
+    border-radius: 6px;
+    display: none;
 }
