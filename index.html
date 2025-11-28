@@ -1,72 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QazLike Simulator</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>Budget Calculator</title>
+<style>
+  .hidden { display: none; }
+  .disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+</style>
 </head>
-
 <body>
 
-<h1>QazLike Simulator</h1>
+<h3>National Budget:</h3>
+<input id="budget" type="number" value="60000000000">
 
-<div class="container">
+<h3>Population:</h3>
+<input id="population" type="number" value="20000000">
 
-    <!-- INITIAL INPUT -->
-    <label>National Budget:
-        <input id="budget" type="number" placeholder="Enter total budget">
-    </label>
+<button id="calcBtn">Calculate</button>
 
-    <label>Population:
-        <input id="population" type="number" placeholder="Enter population">
-    </label>
+<p id="result"></p>
 
-    <button id="calculateBtn">Calculate</button>
+<button id="level1Btn" class="disabled">Level 1 — National Security (Mandatory)</button>
 
-    <div id="result" style="margin-top:16px; display:block;"></div>
-
-
-    <!-- LEVEL 1 SECURITY (HIDDEN BY DEFAULT) -->
-    <div id="level1" style="display:none; margin-top:20px; padding:15px; border:1px solid #888; border-radius:8px; background:#eef2f7;">
-        <h2>Level 1 — National Security (Mandatory)</h2>
-
-        <p>Enter required spending for each sector:</p>
-
-        <label>Army:
-            <input type="number" id="army" value="0">
-        </label><br>
-
-        <label>Border Security:
-            <input type="number" id="border" value="0">
-        </label><br>
-
-        <label>Police:
-            <input type="number" id="police" value="0">
-        </label><br>
-
-        <label>Court System:
-            <input type="number" id="courts" value="0">
-        </label><br>
-
-        <label>Strategic Safety:
-            <input type="number" id="safety" value="0">
-        </label><br>
-
-        <label>Minimal Governance:
-            <input type="number" id="gov" value="0">
-        </label><br><br>
-
-        <button id="confirm-level1">Confirm Level 1</button>
-
-        <p id="level1-status" style="font-weight:bold; margin-top:10px;"></p>
-    </div>
-
+<div id="level1Content" class="hidden">
+  <h3>Level 1 details</h3>
+  <p>Здесь будет продолжение для Level 1…</p>
 </div>
 
-<!-- JS -->
-<script src="script.js"></script>
+<script>
+document.getElementById("calcBtn").addEventListener("click", function () {
+    const budget = parseFloat(document.getElementById("budget").value);
+    const population = parseFloat(document.getElementById("population").value);
+
+    if (budget > 0 && population > 0) {
+        const result = (budget / population).toFixed(2);
+        document.getElementById("result").textContent = "Budget per citizen: " + result;
+
+        // Активируем Level 1 кнопку
+        const levelBtn = document.getElementById("level1Btn");
+        levelBtn.classList.remove("disabled");
+    }
+});
+
+document.getElementById("level1Btn").addEventListener("click", function () {
+    const content = document.getElementById("level1Content");
+    content.classList.toggle("hidden");
+});
+</script>
 
 </body>
 </html>
