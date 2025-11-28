@@ -2,32 +2,106 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Budget Calculator</title>
+<title>Budget Levels</title>
+
 <style>
-  .hidden { display: none; }
-  .disabled {
-    opacity: 0.5;
-    pointer-events: none;
-  }
+    body {
+        font-family: Arial, sans-serif;
+        background: #f5f7fa;
+        padding: 40px;
+        color: #333;
+    }
+
+    h2 {
+        margin-bottom: 10px;
+        color: #333;
+    }
+
+    .card {
+        background: #fff;
+        padding: 20px;
+        margin-bottom: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        max-width: 500px;
+    }
+
+    input {
+        width: 100%;
+        padding: 12px;
+        font-size: 16px;
+        margin-top: 5px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+    }
+
+    button {
+        background: #4c8bf5;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        font-size: 16px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: 0.3s;
+        margin-top: 15px;
+    }
+
+    button:hover {
+        background: #3b72d8;
+    }
+
+    button.disabled {
+        background: #c2c8d0;
+        pointer-events: none;
+        cursor: not-allowed;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .level-block {
+        padding: 15px;
+        background: #eef3ff;
+        border-radius: 8px;
+        margin-top: 10px;
+    }
 </style>
+
 </head>
 <body>
 
-<h3>National Budget:</h3>
-<input id="budget" type="number" value="60000000000">
+<div class="card">
+    <h2>National Budget:</h2>
+    <input id="budget" type="number" value="60000000000">
 
-<h3>Population:</h3>
-<input id="population" type="number" value="20000000">
+    <h2>Population:</h2>
+    <input id="population" type="number" value="20000000">
 
-<button id="calcBtn">Calculate</button>
+    <button id="calcBtn">Calculate</button>
 
-<p id="result"></p>
+    <p id="result" style="font-size: 18px; margin-top: 15px;"></p>
+</div>
 
-<button id="level1Btn" class="disabled">Level 1 — National Security (Mandatory)</button>
+<div class="card">
 
-<div id="level1Content" class="hidden">
-  <h3>Level 1 details</h3>
-  <p>Здесь будет продолжение для Level 1…</p>
+    <button id="level1Btn" class="disabled">Level 1 — National Security</button>
+    <div id="level1Content" class="hidden level-block">
+        <p>Здесь информация по Level 1…</p>
+        <button id="level2Btn" class="disabled">Open Level 2</button>
+    </div>
+
+    <div id="level2Content" class="hidden level-block">
+        <p>Здесь информация по Level 2…</p>
+        <button id="level3Btn" class="disabled">Open Level 3</button>
+    </div>
+
+    <div id="level3Content" class="hidden level-block">
+        <p>Здесь информация по Level 3…</p>
+        <p>✔ Все уровни открыты</p>
+    </div>
+
 </div>
 
 <script>
@@ -37,17 +111,26 @@ document.getElementById("calcBtn").addEventListener("click", function () {
 
     if (budget > 0 && population > 0) {
         const result = (budget / population).toFixed(2);
-        document.getElementById("result").textContent = "Budget per citizen: " + result;
+        document.getElementById("result").textContent =
+            "Budget per citizen: " + result;
 
-        // Активируем Level 1 кнопку
-        const levelBtn = document.getElementById("level1Btn");
-        levelBtn.classList.remove("disabled");
+        // Активируем Level 1
+        document.getElementById("level1Btn").classList.remove("disabled");
     }
 });
 
 document.getElementById("level1Btn").addEventListener("click", function () {
-    const content = document.getElementById("level1Content");
-    content.classList.toggle("hidden");
+    document.getElementById("level1Content").classList.toggle("hidden");
+    document.getElementById("level2Btn").classList.remove("disabled");
+});
+
+document.getElementById("level2Btn").addEventListener("click", function () {
+    document.getElementById("level2Content").classList.toggle("hidden");
+    document.getElementById("level3Btn").classList.remove("disabled");
+});
+
+document.getElementById("level3Btn").addEventListener("click", function () {
+    document.getElementById("level3Content").classList.toggle("hidden");
 });
 </script>
 
