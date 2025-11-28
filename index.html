@@ -8,6 +8,26 @@
   <label>Population:<input id="population" type="number"></label>
   <button id="calculateBtn">Calculate</button>
   <div id="result" style="display:block;margin-top:16px"></div>
+<!-- LEVEL 1 SECURITY -->
+<h2>Level 1 — National Security (Mandatory)</h2>
+
+<div id="level1" style="display:none; margin-top:20px; padding:15px; border:1px solid #888; border-radius:8px; background:#eef2f7;">
+
+    <p>Enter required spending for each sector:</p>
+
+    <label>Army: <input type="number" id="army" value="0"></label><br>
+    <label>Border Security: <input type="number" id="border" value="0"></label><br>
+    <label>Police: <input type="number" id="police" value="0"></label><br>
+    <label>Court System: <input type="number" id="courts" value="0"></label><br>
+    <label>Strategic Safety: <input type="number" id="safety" value="0"></label><br>
+    <label>Minimal Governance: <input type="number" id="gov" value="0"></label><br><br>
+
+    <button id="confirm-level1">Confirm Level 1</button>
+
+    <p id="level1-status" style="font-weight:bold; margin-top:10px;"></p>
+</div>
+
 </div>
 <script src="script.js"></script>
 </body></html>
+
